@@ -14,37 +14,13 @@
         </header>
 
         <div class="tabs">
-            <button class="tab-button active" data-tab="weight-tab">Weight Calculator</button>
-            <button class="tab-button" data-tab="thrust-tab">Quick Thrust</button>
+            <button class="tab-button active" data-tab="thrust-tab">Quick Thrust</button>
+            <button class="tab-button" data-tab="weight-tab">Weight Calculator</button>
             <button class="tab-button" data-tab="reference-tab">Block Reference</button>
         </div>
 
-        <!-- Weight Calculator Tab -->
-        <div id="weight-tab" class="tab-content active">
-            <h2>Block Weight & Thrust Calculator</h2>
-            <p>Add your blocks and their quantities. Results update automatically!</p>
-
-            <div id="blockInputContainer"></div>
-
-            <button class="btn-add" id="addBlockBtn">+ Add Another Block</button>
-
-            <div id="thrusterWarning" class="warning-box"></div>
-
-            <div id="weight-results" class="results">
-                <div class="result-item">
-                    <label>Total Machine Weight:</label>
-                    <span id="totalWeightResult">--</span>
-                </div>
-                <div class="result-item">
-                    <label>Total Thrust Required to Float:</label>
-                    <span id="totalThrustResult">--</span>
-                </div>
-                <div id="weightBreakdown" class="breakdown"></div>
-            </div>
-        </div>
-
         <!-- Quick Thrust Calculator Tab -->
-        <div id="thrust-tab" class="tab-content">
+        <div id="thrust-tab" class="tab-content active">
             <h2>Quick Thrust Calculator</h2>
             <p>Know your machine's weight? Calculate thrust needed for neutral buoyancy.</p>
 
@@ -62,6 +38,36 @@
                     <p><strong>Formula:</strong> Thrust (N) = (9.81 × Weight) ÷ 150 × 150</p>
                     <p>This represents the thrust needed to achieve neutral buoyancy in water.</p>
                 </div>
+            </div>
+        </div>
+
+        <!-- Weight Calculator Tab -->
+        <div id="weight-tab" class="tab-content">
+            <h2>Block Weight & Thrust Calculator</h2>
+            <p>Add your blocks and their quantities. Results update automatically!</p>
+
+            <div class="action-buttons">
+                <button class="btn-add" id="addBlockBtn">+ Add Block</button>
+                <button class="btn-clear" id="clearAllBtn">🗑️ Clear All</button>
+                <button class="btn-export" id="exportBtn">📥 Export</button>
+                <button class="btn-load" id="loadBtn">📤 Load</button>
+                <input type="file" id="fileInput" accept=".json" style="display: none;">
+            </div>
+
+            <div id="blockInputContainer"></div>
+
+            <div id="thrusterWarning" class="warning-box"></div>
+
+            <div id="weight-results" class="results">
+                <div class="result-item">
+                    <label>Total Machine Weight:</label>
+                    <span id="totalWeightResult">--</span>
+                </div>
+                <div class="result-item">
+                    <label>Total Thrust Required to Float:</label>
+                    <span id="totalThrustResult">--</span>
+                </div>
+                <div id="weightBreakdown" class="breakdown"></div>
             </div>
         </div>
 
