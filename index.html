@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combat Machines Neutral Buoyancy Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚙️ Combat Machines Calculator</h1>
+            <p>Calculate neutral buoyancy and thrust requirements for your combat machines</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-button active" data-tab="thrust-tab">Quick Thrust</button>
+            <button class="tab-button" data-tab="weight-tab">Weight Calculator</button>
+            <button class="tab-button" data-tab="reference-tab">Block Reference</button>
+        </div>
+
+        <!-- Quick Thrust Calculator Tab -->
+        <div id="thrust-tab" class="tab-content active">
+            <h2>Quick Thrust Calculator</h2>
+            <p>Know your machine's weight? Calculate thrust needed for neutral buoyancy.</p>
+
+            <div class="input-group">
+                <label for="machineWeight">Machine Weight (kg):</label>
+                <input type="number" id="machineWeight" placeholder="Enter machine weight" min="0" step="0.1">
+            </div>
+
+            <div id="thrust-results" class="results">
+                <div class="result-item">
+                    <label>Required Thrust:</label>
+                    <span id="thrustResult">--</span>
+                </div>
+                <div class="info-box">
+                    <p><strong>Formula:</strong> Thrust (N) = (9.81 × Weight) ÷ 150 × 150</p>
+                    <p>This represents the thrust needed to achieve neutral buoyancy in water.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Weight Calculator Tab -->
+        <div id="weight-tab" class="tab-content">
+            <h2>Block Weight & Thrust Calculator</h2>
+            <p>Add your blocks and their quantities. Results update automatically!</p>
+
+            <div class="action-buttons">
+                <button class="btn-add" id="addBlockBtn">+ Add Block</button>
+                <button class="btn-clear" id="clearAllBtn">🗑️ Clear All</button>
+                <button class="btn-export" id="exportBtn">📥 Export</button>
+                <button class="btn-load" id="loadBtn">📤 Load</button>
+                <input type="file" id="fileInput" accept=".json" style="display: none;">
+            </div>
+
+            <div id="pinnedThrusterSection"></div>
+
+            <div id="blockInputContainer"></div>
+
+            <div id="thrusterWarning" class="warning-box"></div>
+
+            <div id="weight-results" class="results">
+                <div class="result-item">
+                    <label>Total Machine Weight:</label>
+                    <span id="totalWeightResult">--</span>
+                </div>
+                <div class="result-item">
+                    <label>Total Thrust Required to Float:</label>
+                    <span id="totalThrustResult">--</span>
+                </div>
+                <div id="weightBreakdown" class="breakdown"></div>
+            </div>
+        </div>
+
+        <!-- Reference Tab -->
+        <div id="reference-tab" class="tab-content">
+            <h2>Block Reference Guide</h2>
+            <p>Complete list of all Combat Machines blocks with their weights and thrust requirements.</p>
+            
+            <div class="search-container">
+                <input type="text" id="referenceSearch" class="reference-search" placeholder="Search blocks...">
+            </div>
+
+            <div class="info-box">
+                <p><strong>Formula:</strong> Thrust (N) = (9.81 × Weight) ÷ 150 × 150</p>
+                <p><em>All thrust values calculated using the game's neutral buoyancy formula.</em></p>
+            </div>
+
+            <div id="referenceTable" class="reference-table-container"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Combat Machines Neutral Buoyancy Calculator | Last Updated: 2026</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
