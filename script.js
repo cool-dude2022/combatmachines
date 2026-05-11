@@ -1,55 +1,56 @@
 // Combat Machines block data with weights and thrust required to float
-const blockData = {
-    wood: { weight: 8.00, thrust: 10.464 },
-    scrap: { weight: 12.00, thrust: 15.696 },
-    metal: { weight: 40.00, thrust: 52.32 },
-    seat: { weight: 3.40, thrust: 4.447 },
-    wheel: { weight: 21.90, thrust: 28.645 },
-    servo: { weight: 7.00, thrust: 9.156 },
-    spring: { weight: 5.60, thrust: 7.325 },
-    spike: { weight: 2.00, thrust: 2.616 },
-    saw: { weight: 4.50, thrust: 5.886 },
-    thruster: { weight: 6.20, thrust: 8.11 },
-    piston: { weight: 8.40, thrust: 10.987 },
-    glass: { weight: 12.00, thrust: 15.696 },
-    armored_wheel: { weight: 56.70, thrust: 74.164 },
-    armored_servo: { weight: 15.00, thrust: 19.62 },
-    stiff_spring: { weight: 12.00, thrust: 15.696 },
-    metal_wedge: { weight: 20.00, thrust: 26.16 },
-    scrap_wedge: { weight: 6.00, thrust: 7.848 },
-    wood_wedge: { weight: 3.60, thrust: 4.709 },
-    flag: { weight: 5.30, thrust: 6.932 },
-    dynamite: { weight: 10.50, thrust: 13.734 },
-    explosive: { weight: 11.30, thrust: 14.78 },
-    destructive: { weight: 3.30, thrust: 4.316 },
-    thruster_v2: { weight: 9.40, thrust: 12.295 },
-    missile_launcher: { weight: 19.80, thrust: 25.898 },
-    mounted_lmg: { weight: 16.50, thrust: 21.582 },
-    bearing_2_5: { weight: 2.50, thrust: 3.27 },
-    armored_bearing: { weight: 5.30, thrust: 6.932 },
-    flak_cannon: { weight: 30.50, thrust: 39.894 },
-    laser: { weight: 2.40, thrust: 3.139 },
-    hammer: { weight: 33.50, thrust: 43.818 },
-    rubber_wedge: { weight: 6.00, thrust: 7.848 },
-    cardboard: { weight: 0.80, thrust: 1.046 },
-    rubber: { weight: 12.00, thrust: 15.696 },
-    titanium: { weight: 12.00, thrust: 15.696 },
-    monster_wheel: { weight: 177.90, thrust: 232.693 },
-    monster_piston: { weight: 8.40, thrust: 10.987 },
-    monster_servo: { weight: 15.00, thrust: 19.62 },
-    minigun: { weight: 9.40, thrust: 12.295 },
-    grenade_launcher: { weight: 2.80, thrust: 3.662 },
-    pontoon: { weight: 25.20, thrust: 32.962 },
-    boat_propeller: { weight: 6.60, thrust: 8.633 }
-};
+// Ordered as provided in the original list
+const blockData = [
+    { key: 'wood', name: 'Wood', weight: 8.00, thrust: 10.464 },
+    { key: 'scrap', name: 'Scrap', weight: 12.00, thrust: 15.696 },
+    { key: 'metal', name: 'Metal', weight: 40.00, thrust: 52.32 },
+    { key: 'seat', name: 'Seat', weight: 3.40, thrust: 4.447 },
+    { key: 'wheel', name: 'Wheel', weight: 21.90, thrust: 28.645 },
+    { key: 'servo', name: 'Servo', weight: 7.00, thrust: 9.156 },
+    { key: 'spring', name: 'Spring', weight: 5.60, thrust: 7.325 },
+    { key: 'spike', name: 'Spike', weight: 2.00, thrust: 2.616 },
+    { key: 'saw', name: 'Saw', weight: 4.50, thrust: 5.886 },
+    { key: 'thruster', name: 'Thruster', weight: 6.20, thrust: 8.11 },
+    { key: 'piston', name: 'Piston', weight: 8.40, thrust: 10.987 },
+    { key: 'glass', name: 'Glass', weight: 12.00, thrust: 15.696 },
+    { key: 'armored_wheel', name: 'Armored Wheel', weight: 56.70, thrust: 74.164 },
+    { key: 'armored_servo', name: 'Armored Servo', weight: 15.00, thrust: 19.62 },
+    { key: 'stiff_spring', name: 'Stiff Spring', weight: 12.00, thrust: 15.696 },
+    { key: 'metal_wedge', name: 'Metal Wedge', weight: 20.00, thrust: 26.16 },
+    { key: 'scrap_wedge', name: 'Scrap Wedge', weight: 6.00, thrust: 7.848 },
+    { key: 'wood_wedge', name: 'Wood Wedge', weight: 3.60, thrust: 4.709 },
+    { key: 'flag', name: 'Flag (only 1)', weight: 5.30, thrust: 6.932 },
+    { key: 'dynamite', name: 'Dynamite', weight: 10.50, thrust: 13.734 },
+    { key: 'explosive', name: 'Explosive', weight: 11.30, thrust: 14.78 },
+    { key: 'destructive', name: 'Destructive', weight: 3.30, thrust: 4.316 },
+    { key: 'thruster_v2', name: 'Thruster V2', weight: 9.40, thrust: 12.295 },
+    { key: 'missile_launcher', name: 'Missile Launcher', weight: 19.80, thrust: 25.898 },
+    { key: 'mounted_lmg', name: 'Mounted LMG', weight: 16.50, thrust: 21.582 },
+    { key: 'bearing_2_5', name: 'Bearing 2.5', weight: 2.50, thrust: 3.27 },
+    { key: 'armored_bearing', name: 'Armored Bearing', weight: 5.30, thrust: 6.932 },
+    { key: 'flak_cannon', name: 'Flak Cannon', weight: 30.50, thrust: 39.894 },
+    { key: 'laser', name: 'Laser', weight: 2.40, thrust: 3.139 },
+    { key: 'hammer', name: 'Hammer', weight: 33.50, thrust: 43.818 },
+    { key: 'rubber_wedge', name: 'Rubber Wedge', weight: 6.00, thrust: 7.848 },
+    { key: 'cardboard', name: 'Cardboard', weight: 0.80, thrust: 1.046 },
+    { key: 'rubber', name: 'Rubber', weight: 12.00, thrust: 15.696 },
+    { key: 'titanium', name: 'Titanium', weight: 12.00, thrust: 15.696 },
+    { key: 'monster_wheel', name: 'Monster Wheel', weight: 177.90, thrust: 232.693 },
+    { key: 'monster_piston', name: 'Monster Piston', weight: 8.40, thrust: 10.987 },
+    { key: 'monster_servo', name: 'Monster Servo', weight: 15.00, thrust: 19.62 },
+    { key: 'minigun', name: 'Minigun', weight: 9.40, thrust: 12.295 },
+    { key: 'grenade_launcher', name: 'Grenade Launcher', weight: 2.80, thrust: 3.662 },
+    { key: 'pontoon', name: 'Pontoon', weight: 25.20, thrust: 32.962 },
+    { key: 'boat_propeller', name: 'Boat Propeller', weight: 6.60, thrust: 8.633 }
+];
 
-// Create sorted block names for dropdown
-const blockNames = Object.keys(blockData).sort().map(key => ({
-    value: key,
-    display: key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
-}));
+// Create block lookup map
+const blockMap = {};
+blockData.forEach(block => {
+    blockMap[block.key] = block;
+});
 
-let blockInputCount = 1;
+let blockInputCount = 0;
 
 // Tab switching functionality
 document.querySelectorAll('.tab-button').forEach(button => {
@@ -64,6 +65,11 @@ document.querySelectorAll('.tab-button').forEach(button => {
         // Show corresponding content
         const tabId = button.getAttribute('data-tab');
         document.getElementById(tabId).classList.add('active');
+
+        // Initialize reference table if showing reference tab
+        if (tabId === 'reference-tab') {
+            initializeReferenceTable();
+        }
     });
 });
 
@@ -72,148 +78,230 @@ document.getElementById('addBlockBtn').addEventListener('click', () => {
     addBlockInput();
 });
 
-function createBlockSelect() {
+function createBlockSelect(excludeKeys = []) {
     let options = '<option value="">-- Select Block Type --</option>';
-    blockNames.forEach(block => {
-        options += `<option value="${block.value}">${block.display} (${blockData[block.value].weight.toFixed(2)} kg)</option>`;
+    blockData.forEach(block => {
+        if (!excludeKeys.includes(block.key)) {
+            options += `<option value="${block.key}">${block.name} (${block.weight.toFixed(2)} kg)</option>`;
+        }
     });
     return options;
 }
 
+function getSelectedBlocks() {
+    const container = document.getElementById('blockInputContainer');
+    const selects = container.querySelectorAll('.block-type-select');
+    const selected = [];
+    selects.forEach(select => {
+        if (select.value) {
+            selected.push(select.value);
+        }
+    });
+    return selected;
+}
+
 function addBlockInput() {
     const container = document.getElementById('blockInputContainer');
-    const newId = blockInputCount;
+    const groups = container.querySelectorAll('.block-input-group');
+    
+    // Check if there's already 41 blocks (max possible)
+    if (groups.length >= 41) {
+        alert('You have already added all available blocks!');
+        return;
+    }
 
+    const newId = blockInputCount++;
     const blockGroup = document.createElement('div');
     blockGroup.className = 'block-input-group';
     blockGroup.innerHTML = `
-        <label for="blockType${newId}">Block Type:</label>
-        <select id="blockType${newId}" class="block-type-select">
-            ${createBlockSelect()}
-        </select>
+        <div class="search-wrapper">
+            <input type="text" class="block-search" id="search${newId}" placeholder="Search blocks...">
+            <select id="blockType${newId}" class="block-type-select">
+                ${createBlockSelect()}
+            </select>
+        </div>
         <label for="blockCount${newId}">Quantity:</label>
-        <input type="number" id="blockCount${newId}" class="block-count-input" min="0" placeholder="Number of blocks">
+        <input type="number" id="blockCount${newId}" class="block-count-input" min="0" placeholder="0">
         <button class="btn-remove" onclick="removeBlockInput(${newId})">Remove</button>
     `;
 
     container.appendChild(blockGroup);
-    blockInputCount++;
+
+    // Setup search and change handlers
+    const select = blockGroup.querySelector(`#blockType${newId}`);
+    const search = blockGroup.querySelector(`#search${newId}`);
+    const countInput = blockGroup.querySelector(`#blockCount${newId}`);
+
+    // Search functionality
+    search.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+        const selected = getSelectedBlocks();
+        let options = '<option value="">-- Select Block Type --</option>';
+        
+        blockData.forEach(block => {
+            if (block.name.toLowerCase().includes(query) && !selected.includes(block.key)) {
+                options += `<option value="${block.key}">${block.name} (${block.weight.toFixed(2)} kg)</option>`;
+            }
+        });
+        
+        select.innerHTML = options;
+    });
+
+    // Update dropdown when selection changes
+    select.addEventListener('change', (e) => {
+        search.value = '';
+        recalculateWeight();
+        updateAllBlockSelects();
+    });
+
+    // Real-time calculation on count change
+    countInput.addEventListener('input', () => {
+        recalculateWeight();
+    });
+}
+
+function updateAllBlockSelects() {
+    const container = document.getElementById('blockInputContainer');
+    const groups = container.querySelectorAll('.block-input-group');
+    const selected = getSelectedBlocks();
+
+    groups.forEach(group => {
+        const select = group.querySelector('.block-type-select');
+        const search = group.querySelector('.block-search');
+        const currentValue = select.value;
+
+        // Rebuild options excluding selected blocks
+        let options = '<option value="">-- Select Block Type --</option>';
+        blockData.forEach(block => {
+            // Show this block if it's not selected, or if it's the current selection
+            if (!selected.includes(block.key) || block.key === currentValue) {
+                options += `<option value="${block.key}">${block.name} (${block.weight.toFixed(2)} kg)</option>`;
+            }
+        });
+
+        select.innerHTML = options;
+        select.value = currentValue;
+    });
 }
 
 function removeBlockInput(id) {
     const container = document.getElementById('blockInputContainer');
-    const inputs = container.querySelectorAll('.block-input-group');
+    const groups = container.querySelectorAll('.block-input-group');
     
-    // Prevent removing the last input
-    if (inputs.length === 1) {
-        alert('You must have at least one block type.');
-        return;
-    }
-
-    const groupToRemove = Array.from(inputs).find(group => {
+    const groupToRemove = Array.from(groups).find(group => {
         const select = group.querySelector('select');
         return select.id === `blockType${id}`;
     });
 
     if (groupToRemove) {
         groupToRemove.remove();
+        updateAllBlockSelects();
+        recalculateWeight();
     }
 }
 
-// Calculate weight and thrust from blocks
-document.getElementById('calculateWeightBtn').addEventListener('click', () => {
+function recalculateWeight() {
     const container = document.getElementById('blockInputContainer');
     const blockGroups = container.querySelectorAll('.block-input-group');
 
     let totalWeight = 0;
     let totalThrust = 0;
-    let isValid = true;
+    let thrusterCount = 0;
+    let thrusterThrustAmount = 0;
     let blockSummary = [];
 
     blockGroups.forEach(group => {
         const select = group.querySelector('select');
         const input = group.querySelector('input');
-        const blockType = select.value;
+        const blockKey = select.value;
         const count = parseInt(input.value) || 0;
 
-        if (blockType && count > 0) {
-            const blockInfo = blockData[blockType];
+        if (blockKey && count > 0) {
+            const blockInfo = blockMap[blockKey];
             const blockWeight = blockInfo.weight * count;
             const blockThrust = blockInfo.thrust * count;
             
             totalWeight += blockWeight;
             totalThrust += blockThrust;
+
+            // Track thrusters
+            if (blockKey === 'thruster' || blockKey === 'thruster_v2') {
+                thrusterCount += count;
+                thrusterThrustAmount += blockThrust;
+            }
             
             blockSummary.push({
-                name: select.options[select.selectedIndex].text.split('(')[0].trim(),
+                name: blockInfo.name,
                 count: count,
                 weight: blockWeight,
                 thrust: blockThrust
             });
-        } else if ((blockType && count === 0) || (!blockType && count > 0)) {
-            isValid = false;
         }
     });
 
-    if (!isValid) {
-        alert('Please select a block type AND enter a quantity for all entries.');
-        return;
-    }
-
-    if (totalWeight === 0) {
-        alert('Please add at least one block with a quantity greater than 0.');
-        return;
-    }
-
-    // Display results
+    // Update results
     document.getElementById('totalWeightResult').textContent = totalWeight.toFixed(2) + ' kg';
-    document.getElementById('totalThrustResult').textContent = totalThrust.toFixed(3) + ' N';
+    document.getElementById('totalThrustResult').textContent = (totalThrust * 150).toFixed(2) + ' N';
     
+    // Update thruster info
+    if (thrusterCount === 0) {
+        document.getElementById('thrusterWarning').innerHTML = '<span class="warning">⚠️ No thrusters added! You need at least 1 thruster to achieve neutral buoyancy.</span>';
+    } else {
+        document.getElementById('thrusterWarning').innerHTML = `<span class="info">✓ Thrusters: ${thrusterCount} | Thruster Thrust: ${(thrusterThrustAmount * 150).toFixed(2)} N</span>`;
+    }
+
     // Display block breakdown
     let breakdownHTML = '<h4>Block Breakdown:</h4><table class="breakdown-table"><tr><th>Block</th><th>Quantity</th><th>Weight</th><th>Thrust</th></tr>';
     blockSummary.forEach(block => {
-        breakdownHTML += `<tr><td>${block.name}</td><td>${block.count}</td><td>${block.weight.toFixed(2)} kg</td><td>${block.thrust.toFixed(3)} N</td></tr>`;
+        breakdownHTML += `<tr><td>${block.name}</td><td>${block.count}</td><td>${block.weight.toFixed(2)} kg</td><td>${(block.thrust * 150).toFixed(2)} N</td></tr>`;
     });
     breakdownHTML += '</table>';
     
     document.getElementById('weightBreakdown').innerHTML = breakdownHTML;
-});
+}
 
-// Calculate thrust from weight
-document.getElementById('calculateThrustBtn').addEventListener('click', () => {
+// Quick thrust calculator with real-time update
+document.getElementById('machineWeight').addEventListener('input', () => {
     const weightInput = document.getElementById('machineWeight').value;
 
-    if (!weightInput || weightInput <= 0) {
-        alert('Please enter a valid machine weight.');
-        return;
-    }
-
-    const machineWeight = parseFloat(weightInput);
-
-    // Formula: Thrust = (gravity * weight) / 150 = (9.81 * weight) / 150
-    // Simplified: Thrust = weight * 0.0654
-    const thrustNewtons = (9.81 * machineWeight) / 150;
-
-    document.getElementById('thrustResult').textContent = thrustNewtons.toFixed(3) + ' N';
-});
-
-// Allow Enter key to calculate
-document.getElementById('machineWeight').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        document.getElementById('calculateThrustBtn').click();
+    if (weightInput && weightInput > 0) {
+        const machineWeight = parseFloat(weightInput);
+        const thrustNewtons = (9.81 * machineWeight) / 150;
+        document.getElementById('thrustResult').textContent = (thrustNewtons * 150).toFixed(2) + ' N';
+    } else {
+        document.getElementById('thrustResult').textContent = '--';
     }
 });
 
-// Populate block reference table
-window.addEventListener('DOMContentLoaded', () => {
+// Reference table with search
+function initializeReferenceTable() {
     const referenceTable = document.getElementById('referenceTable');
-    if (referenceTable) {
+    const searchInput = document.getElementById('referenceSearch');
+
+    function renderTable(filter = '') {
         let tableHTML = '<table class="reference-table"><tr><th>Block Name</th><th>Weight</th><th>Thrust to Float</th></tr>';
-        blockNames.forEach(block => {
-            const data = blockData[block.value];
-            tableHTML += `<tr><td>${block.display}</td><td>${data.weight.toFixed(2)} kg</td><td>${data.thrust.toFixed(3)} N</td></tr>`;
+        blockData.forEach(block => {
+            if (block.name.toLowerCase().includes(filter.toLowerCase())) {
+                tableHTML += `<tr><td>${block.name}</td><td>${block.weight.toFixed(2)} kg</td><td>${(block.thrust * 150).toFixed(2)} N</td></tr>`;
+            }
         });
         tableHTML += '</table>';
         referenceTable.innerHTML = tableHTML;
     }
+
+    // Initial render
+    renderTable();
+
+    // Search functionality
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            renderTable(e.target.value);
+        });
+    }
+}
+
+// Initialize first block input on page load
+window.addEventListener('DOMContentLoaded', () => {
+    addBlockInput();
+    initializeReferenceTable();
 });
