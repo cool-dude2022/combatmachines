@@ -15,32 +15,20 @@
 
         <div class="tabs">
             <button class="tab-button active" data-tab="weight-tab">Weight Calculator</button>
-            <button class="tab-button" data-tab="thrust-tab">Thrust Calculator</button>
+            <button class="tab-button" data-tab="thrust-tab">Quick Thrust</button>
             <button class="tab-button" data-tab="reference-tab">Block Reference</button>
         </div>
 
         <!-- Weight Calculator Tab -->
         <div id="weight-tab" class="tab-content active">
             <h2>Block Weight & Thrust Calculator</h2>
-            <p>Add your blocks and their quantities to calculate total weight and required thrust to float.</p>
+            <p>Add your blocks and their quantities. Results update automatically!</p>
 
-            <div id="blockInputContainer">
-                <div class="block-input-group">
-                    <label for="blockType0">Block Type:</label>
-                    <select id="blockType0" class="block-type-select">
-                        <option value="">-- Select Block Type --</option>
-                    </select>
-                    <label for="blockCount0">Quantity:</label>
-                    <input type="number" id="blockCount0" class="block-count-input" min="0" placeholder="Number of blocks">
-                    <button class="btn-remove" onclick="removeBlockInput(0)">Remove</button>
-                </div>
-            </div>
+            <div id="blockInputContainer"></div>
 
             <button class="btn-add" id="addBlockBtn">+ Add Another Block</button>
 
-            <div class="button-group">
-                <button class="btn-calculate" id="calculateWeightBtn">Calculate</button>
-            </div>
+            <div id="thrusterWarning" class="warning-box"></div>
 
             <div id="weight-results" class="results">
                 <div class="result-item">
@@ -55,18 +43,14 @@
             </div>
         </div>
 
-        <!-- Thrust Calculator Tab -->
+        <!-- Quick Thrust Calculator Tab -->
         <div id="thrust-tab" class="tab-content">
             <h2>Quick Thrust Calculator</h2>
-            <p>Know your machine's weight? Use this to calculate thrust needed to make it neutrally buoyant.</p>
+            <p>Know your machine's weight? Calculate thrust needed for neutral buoyancy.</p>
 
             <div class="input-group">
                 <label for="machineWeight">Machine Weight (kg):</label>
                 <input type="number" id="machineWeight" placeholder="Enter machine weight" min="0" step="0.1">
-            </div>
-
-            <div class="button-group">
-                <button class="btn-calculate" id="calculateThrustBtn">Calculate Thrust</button>
             </div>
 
             <div id="thrust-results" class="results">
@@ -75,7 +59,7 @@
                     <span id="thrustResult">--</span>
                 </div>
                 <div class="info-box">
-                    <p><strong>Formula:</strong> Thrust (N) = (9.81 × Weight) ÷ 150</p>
+                    <p><strong>Formula:</strong> Thrust (N) = (9.81 × Weight) ÷ 150 × 150</p>
                     <p>This represents the thrust needed to achieve neutral buoyancy in water.</p>
                 </div>
             </div>
@@ -86,8 +70,12 @@
             <h2>Block Reference Guide</h2>
             <p>Complete list of all Combat Machines blocks with their weights and thrust requirements.</p>
             
+            <div class="search-container">
+                <input type="text" id="referenceSearch" class="reference-search" placeholder="Search blocks...">
+            </div>
+
             <div class="info-box">
-                <p><strong>Formula:</strong> Thrust (N) = (9.81 × Weight) ÷ 150</p>
+                <p><strong>Formula:</strong> Thrust (N) = (9.81 × Weight) ÷ 150 × 150</p>
                 <p><em>All thrust values calculated using the game's neutral buoyancy formula.</em></p>
             </div>
 
