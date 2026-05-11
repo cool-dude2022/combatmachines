@@ -105,6 +105,67 @@ h2 {
     line-height: 1.6;
 }
 
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.action-buttons button {
+    flex: 1;
+    min-width: 120px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-add {
+    background: #667eea;
+    color: white;
+}
+
+.btn-add:hover {
+    background: #5568d3;
+    transform: translateY(-2px);
+}
+
+.btn-clear {
+    background: #ff6b6b;
+    color: white;
+}
+
+.btn-clear:hover {
+    background: #ee5a52;
+    transform: translateY(-2px);
+}
+
+.btn-export {
+    background: #4ecdc4;
+    color: white;
+}
+
+.btn-export:hover {
+    background: #45b9b1;
+    transform: translateY(-2px);
+}
+
+.btn-load {
+    background: #f7b731;
+    color: white;
+}
+
+.btn-load:hover {
+    background: #e0a125;
+    transform: translateY(-2px);
+}
+
 .block-input-group {
     display: grid;
     grid-template-columns: 1fr 1.5fr 1fr 100px;
@@ -142,6 +203,15 @@ h2 {
         grid-template-columns: 1fr;
         gap: 10px;
     }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .action-buttons button {
+        flex: 1;
+        min-width: auto;
+    }
 }
 
 .input-group {
@@ -178,24 +248,6 @@ select:focus, input[type="number"]:focus, input[type="text"]:focus {
     outline: none;
     border-color: #667eea;
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-.btn-add {
-    padding: 12px 24px;
-    background: #667eea;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 1em;
-    font-weight: 600;
-    cursor: pointer;
-    margin-bottom: 20px;
-    transition: all 0.3s ease;
-}
-
-.btn-add:hover {
-    background: #764ba2;
-    transform: translateY(-2px);
 }
 
 .btn-remove {
@@ -374,7 +426,8 @@ footer {
 
     .tab-button {
         flex: 0 1 auto;
-        min-width: 120px;
+        min-width: 100px;
+        font-size: 0.85em;
     }
 
     .tab-content {
@@ -429,5 +482,15 @@ footer {
 
     h2 {
         font-size: 1.5em;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .action-buttons button {
+        font-size: 0.85em;
+        padding: 8px 12px;
     }
 }
