@@ -51,6 +51,7 @@ blockData.forEach(block => {
 });
 
 let blockInputCount = 0;
+const STORAGE_KEY = 'combatMachinesCalculator';
 
 // Tab switching functionality
 document.querySelectorAll('.tab-button').forEach(button => {
@@ -76,6 +77,45 @@ document.querySelectorAll('.tab-button').forEach(button => {
 // Add block input functionality
 document.getElementById('addBlockBtn').addEventListener('click', () => {
     addBlockInput();
+});
+
+// Clear all blocks
+document.getElementById('clearAllBtn').addEventListener('click', () => {
+    if (confirm('Are you sure you want to clear all blocks? This cannot be undone.')) {
+        const container = document.getElementById('blockInputContainer');
+        container.innerHTML = '';
+        blockInputCount = 0;
+        addBlockInput();
+        recalculateWeight();
+        clearLocalStorage();
+    }
+});
+
+// Export functionality
+document.getElementById('exportBtn').addEventListener('click', () => {
+    exportCalculation();
+});
+
+// Load functionality
+document.getElementById('loadBtn').addEventListener('click', () => {
+    document.getElementById('fileInput').click();
+});
+
+document.getElementById('fileInput').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            try {
+                const data = JSON.parse(event.target.result);
+                loadCalculation(data);
+                alert('Calculation loaded successfully!');
+            } catch (error) {
+                alert('Error loading file. Please make sure it\'s a valid export file.');
+            }
+        };
+        reader.readAsText(file);
+    }
 });
 
 function createBlockSelect(excludeKeys = []) {
@@ -104,7 +144,6 @@ function addBlockInput() {
     const container = document.getElementById('blockInputContainer');
     const groups = container.querySelectorAll('.block-input-group');
     
-    // Check if there's already 41 blocks (max possible)
     if (groups.length >= 41) {
         alert('You have already added all available blocks!');
         return;
@@ -127,12 +166,10 @@ function addBlockInput() {
 
     container.appendChild(blockGroup);
 
-    // Setup search and change handlers
     const select = blockGroup.querySelector(`#blockType${newId}`);
     const search = blockGroup.querySelector(`#search${newId}`);
     const countInput = blockGroup.querySelector(`#blockCount${newId}`);
 
-    // Search functionality
     search.addEventListener('input', (e) => {
         const query = e.target.value.toLowerCase();
         const selected = getSelectedBlocks();
@@ -147,16 +184,16 @@ function addBlockInput() {
         select.innerHTML = options;
     });
 
-    // Update dropdown when selection changes
     select.addEventListener('change', (e) => {
         search.value = '';
         recalculateWeight();
         updateAllBlockSelects();
+        saveToLocalStorage();
     });
 
-    // Real-time calculation on count change
     countInput.addEventListener('input', () => {
         recalculateWeight();
+        saveToLocalStorage();
     });
 }
 
@@ -167,13 +204,10 @@ function updateAllBlockSelects() {
 
     groups.forEach(group => {
         const select = group.querySelector('.block-type-select');
-        const search = group.querySelector('.block-search');
         const currentValue = select.value;
 
-        // Rebuild options excluding selected blocks
         let options = '<option value="">-- Select Block Type --</option>';
         blockData.forEach(block => {
-            // Show this block if it's not selected, or if it's the current selection
             if (!selected.includes(block.key) || block.key === currentValue) {
                 options += `<option value="${block.key}">${block.name} (${block.weight.toFixed(2)} kg)</option>`;
             }
@@ -197,6 +231,7 @@ function removeBlockInput(id) {
         groupToRemove.remove();
         updateAllBlockSelects();
         recalculateWeight();
+        saveToLocalStorage();
     }
 }
 
@@ -224,7 +259,6 @@ function recalculateWeight() {
             totalWeight += blockWeight;
             totalThrust += blockThrust;
 
-            // Track thrusters
             if (blockKey === 'thruster' || blockKey === 'thruster_v2') {
                 thrusterCount += count;
                 thrusterThrustAmount += blockThrust;
@@ -239,18 +273,15 @@ function recalculateWeight() {
         }
     });
 
-    // Update results
     document.getElementById('totalWeightResult').textContent = totalWeight.toFixed(2) + ' kg';
     document.getElementById('totalThrustResult').textContent = (totalThrust * 150).toFixed(2) + ' N';
     
-    // Update thruster info
     if (thrusterCount === 0) {
         document.getElementById('thrusterWarning').innerHTML = '<span class="warning">⚠️ No thrusters added! You need at least 1 thruster to achieve neutral buoyancy.</span>';
     } else {
         document.getElementById('thrusterWarning').innerHTML = `<span class="info">✓ Thrusters: ${thrusterCount} | Thruster Thrust: ${(thrusterThrustAmount * 150).toFixed(2)} N</span>`;
     }
 
-    // Display block breakdown
     let breakdownHTML = '<h4>Block Breakdown:</h4><table class="breakdown-table"><tr><th>Block</th><th>Quantity</th><th>Weight</th><th>Thrust</th></tr>';
     blockSummary.forEach(block => {
         breakdownHTML += `<tr><td>${block.name}</td><td>${block.count}</td><td>${block.weight.toFixed(2)} kg</td><td>${(block.thrust * 150).toFixed(2)} N</td></tr>`;
@@ -289,10 +320,8 @@ function initializeReferenceTable() {
         referenceTable.innerHTML = tableHTML;
     }
 
-    // Initial render
     renderTable();
 
-    // Search functionality
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
             renderTable(e.target.value);
@@ -300,8 +329,147 @@ function initializeReferenceTable() {
     }
 }
 
-// Initialize first block input on page load
+// Export calculation to JSON file
+function exportCalculation() {
+    const container = document.getElementById('blockInputContainer');
+    const blockGroups = container.querySelectorAll('.block-input-group');
+    const blocks = [];
+
+    blockGroups.forEach(group => {
+        const select = group.querySelector('select');
+        const input = group.querySelector('input');
+        const blockKey = select.value;
+        const count = parseInt(input.value) || 0;
+
+        if (blockKey && count > 0) {
+            blocks.push({
+                blockKey: blockKey,
+                blockName: blockMap[blockKey].name,
+                count: count
+            });
+        }
+    });
+
+    const data = {
+        version: '1.0',
+        timestamp: new Date().toISOString(),
+        blocks: blocks
+    };
+
+    const dataStr = JSON.stringify(data, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `combat-machine-${new Date().toISOString().split('T')[0]}.json`;
+    link.click();
+    URL.revokeObjectURL(url);
+}
+
+// Load calculation from JSON
+function loadCalculation(data) {
+    const container = document.getElementById('blockInputContainer');
+    container.innerHTML = '';
+    blockInputCount = 0;
+
+    if (!data.blocks || data.blocks.length === 0) {
+        addBlockInput();
+        return;
+    }
+
+    data.blocks.forEach((block, index) => {
+        if (index > 0 || container.children.length === 0) {
+            addBlockInput();
+        }
+
+        const groups = container.querySelectorAll('.block-input-group');
+        const currentGroup = groups[index];
+
+        if (currentGroup) {
+            const select = currentGroup.querySelector('.block-type-select');
+            const input = currentGroup.querySelector('.block-count-input');
+            const search = currentGroup.querySelector('.block-search');
+
+            select.value = block.blockKey;
+            input.value = block.count;
+            search.value = '';
+        }
+    });
+
+    updateAllBlockSelects();
+    recalculateWeight();
+    saveToLocalStorage();
+}
+
+// Local storage functions
+function saveToLocalStorage() {
+    const container = document.getElementById('blockInputContainer');
+    const blockGroups = container.querySelectorAll('.block-input-group');
+    const blocks = [];
+
+    blockGroups.forEach(group => {
+        const select = group.querySelector('select');
+        const input = group.querySelector('input');
+        const blockKey = select.value;
+        const count = parseInt(input.value) || 0;
+
+        if (blockKey) {
+            blocks.push({
+                blockKey: blockKey,
+                count: count
+            });
+        }
+    });
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(blocks));
+}
+
+function clearLocalStorage() {
+    localStorage.removeItem(STORAGE_KEY);
+}
+
+function loadFromLocalStorage() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+        try {
+            const blocks = JSON.parse(saved);
+            const container = document.getElementById('blockInputContainer');
+            container.innerHTML = '';
+            blockInputCount = 0;
+
+            if (blocks.length === 0) {
+                addBlockInput();
+                return;
+            }
+
+            blocks.forEach((block, index) => {
+                addBlockInput();
+                const groups = container.querySelectorAll('.block-input-group');
+                const currentGroup = groups[index];
+
+                if (currentGroup) {
+                    const select = currentGroup.querySelector('.block-type-select');
+                    const input = currentGroup.querySelector('.block-count-input');
+
+                    select.value = block.blockKey;
+                    input.value = block.count;
+                }
+            });
+
+            updateAllBlockSelects();
+            recalculateWeight();
+        } catch (error) {
+            console.error('Error loading from local storage:', error);
+            addBlockInput();
+        }
+    }
+}
+
+// Initialize on page load
 window.addEventListener('DOMContentLoaded', () => {
-    addBlockInput();
+    loadFromLocalStorage();
+    if (document.getElementById('blockInputContainer').children.length === 0) {
+        addBlockInput();
+    }
     initializeReferenceTable();
 });
